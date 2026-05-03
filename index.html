@@ -2379,14 +2379,14 @@
           };
           ORDERS.unshift(order); saveOrders();
 
-          const itemsText = items.map(i => `• ${i.name} (${i.size}) × ${i.qty} = ${fmt(i.price*i.qty)}`).join('%0A');
-          const waMsg = `🛍️ *طلب جديد #${orderId}*%0A%0A` +
-            `👤 ${name}%0A📱 ${phone}%0A📍 ${address}%0A${email?'📧 '+email+'%0A':''}` +
-            `💳 ${payment}%0A%0A*المنتجات:*%0A${itemsText}%0A%0A` +
-            `💰 *الإجمالي: ${fmt(total)}*%0A%0A` +
-            `🔎 رابط تفاصيل الطلب:%0A${window.location.origin + window.location.pathname}?track=${orderId}`;
-          window.open('https://wa.me/'+(STORE_SETTINGS.whatsapp||'')+'?text=' + waMsg, '_blank');
-
+          const itemsText = items.map(i => `• ${i.name} (${i.size}) × ${i.qty} = ${(i.price*i.qty).toLocaleString('ar-SA')} ر.س`).join('\n');
+        const waMsg = `🛍️ *طلب جديد ${orderId}*\n\n` +
+          `👤 ${name}\n📱 ${phone}\n📍 ${address}\n${email?'📧 '+email+'\n':''}` +
+          `💳 ${payment}\n\n*المنتجات:*\n${itemsText}\n\n` +
+          `💰 *الإجمالي: ${total.toLocaleString('ar-SA')} ر.س*\n\n` +
+          `🔎 رابط تفاصيل الطلب:\n${window.location.origin + window.location.pathname}?track=${orderId}`;
+        
+        window.open('https://wa.me/00967735833196?text=' + encodeURIComponent(waMsg), '_blank');
           showOrderConfirmation(orderId, total);
           clearCart();
           if(qs('#name')) qs('#name').value = '';
