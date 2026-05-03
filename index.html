@@ -311,6 +311,7 @@
           <a class="chip hover:opacity-90" href="#best">الأكثر مبيعًا</a>
           <a class="chip hover:opacity-90" href="#reviews">آراء العملاء</a>
           <a class="chip hover:opacity-90" href="#faq">الأسئلة</a>
+          <button class="chip hover:opacity-90 cursor-pointer font-bold" style="color: var(--gold);" onclick="openTrackOrder()">تتبع الطلب 🔎</button>
         </div>
 
         <div class="flex items-center gap-2">
@@ -423,6 +424,7 @@
         الأسئلة الشائعة
         <span class="text-white/50 text-sm">↩</span>
       </a>
+      <button onclick="closeDrawer(); openTrackOrder()" class="btn btn-ghost w-full justify-between" style="color: var(--gold);">تتبع طلبك <span class="text-white/50 text-sm">🔎</span></button>
 
       <div class="mt-4 glass rounded-2xl p-4 border border-white/10">
         <div class="flex items-center justify-between gap-2">
@@ -1056,6 +1058,7 @@
               <a href="#best" class="btn btn-ghost justify-between">الأكثر <span class="text-white/40">↩</span></a>
               <a href="#reviews" class="btn btn-ghost justify-between">الآراء <span class="text-white/40">↩</span></a>
               <a href="#checkout" class="btn btn-ghost justify-between">الدفع <span class="text-white/40">↩</span></a>
+              <button onclick="openTrackOrder()" class="btn btn-ghost justify-between" style="color: var(--gold);">تتبع الطلب <span class="text-white/40">🔎</span></button>
             </div>
           </div>
 
@@ -2381,7 +2384,7 @@
             `👤 ${name}%0A📱 ${phone}%0A📍 ${address}%0A${email?'📧 '+email+'%0A':''}` +
             `💳 ${payment}%0A%0A*المنتجات:*%0A${itemsText}%0A%0A` +
             `💰 *الإجمالي: ${fmt(total)}*%0A%0A` +
-            `🔎 رقم الطلب: ${orderId}`;
+            `🔎 رابط تفاصيل الطلب:%0A${window.location.origin + window.location.pathname}?track=${orderId}`;
           window.open('https://wa.me/'+(STORE_SETTINGS.whatsapp||'')+'?text=' + waMsg, '_blank');
 
           showOrderConfirmation(orderId, total);
@@ -2500,7 +2503,9 @@
       updateCartBadge();
       updateSummary(); // This renders dynamic sections
       startDealTimer();
-      bind();
+      bind();// فتح الطلب تلقائياً من الرابط
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('track')) setTimeout(() => window.openTrackOrder(urlParams.get('track')), 600);
     });
 
   </script>
