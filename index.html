@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>مخور | متجر المخاور الفاخر</title>
   <meta name="description" content="متجر مخور لبيع المخاور الفاخرة بألوان عنابي مع أبيض وذهبي. تجربة تسوق سلسة، سريعة، ومناسبة للجوال." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -2386,7 +2389,7 @@
           `💰 *الإجمالي: ${total.toLocaleString('ar-SA')} ر.س*\n\n` +
           `🔎 رابط تفاصيل الطلب:\n${window.location.origin + window.location.pathname}?track=${orderId}`;
         
-        window.open('https://wa.me/00967735833196?text=' + encodeURIComponent(waMsg), '_blank');
+        window.open('https://wa.me/967735833196?text=' + encodeURIComponent(waMsg), '_blank');
           showOrderConfirmation(orderId, total);
           clearCart();
           if(qs('#name')) qs('#name').value = '';
